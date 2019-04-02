@@ -1,0 +1,28 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace TestCalc
+{
+    [TestClass]
+    public class SelTest1
+    {
+        IWebDriver driver;
+        
+        [TestMethod]
+        public void TestMethod1()
+        {
+        driver = new ChromeDriver();
+            driver.Url = "https://calc.by/math-calculators/scientific-calculator.html";
+            driver.FindElement(By.Id("btn_7")).Click();
+            driver.FindElement(By.Id("btn_plus")).Click();
+            driver.FindElement(By.Id("btn_5")).Click();
+            driver.FindElement(By.Id("btn_enter")).Click();
+            string result = driver.FindElement(By.Id("calc_display_input")).GetAttribute("value");
+            Assert.AreEqual("35", result);
+            driver.Close();
+        }
+    }
+}
+
